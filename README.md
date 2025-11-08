@@ -1,4 +1,6 @@
-# 🚀 Laravel & GitHub Complete Command Cheat Sheet (All-in-One)
+# 🚀 Laravel, PHP & GitHub Full Web App Development Command Cheat Sheet
+
+> **Note:** Lahat ng commands na may kinalaman sa pag-develop ng web app gamit ang Laravel at PHP, kasama ang version control sa Git/GitHub. May kasamang usage notes at placeholders kung saan papalitan.
 
 ## 🧱 1. Installation & Setup
 
@@ -6,54 +8,58 @@
 # Install Laravel globally
 composer global require laravel/installer
 
-# Create new Laravel project
+# Create new Laravel project (replace 'project_name')
 laravel new project_name
 
 # OR without installer
 composer create-project --prefer-dist laravel/laravel project_name
 
-# Run local development server
+# Run local development server (default port 8000)
 php artisan serve
 
 # Check Laravel version
 php artisan --version
+
+# Check PHP version
+php -v
 ```
+
+**Usage:** Installation at initial setup ng project.
 
 ---
 
 ## ⚙️ 2. Environment Setup
 
 ```bash
-# Copy .env file
+# Copy environment file
 cp .env.example .env
 
-# Generate new app key
+# Generate new application key (encryption)
 php artisan key:generate
 
-# Clear and rebuild caches
+# Optimize application for production
 php artisan optimize
 php artisan config:cache
 php artisan route:cache
 php artisan view:cache
 php artisan event:cache
 
-# Clear caches
+# Clear all caches (use while debugging)
 php artisan cache:clear
 php artisan config:clear
 php artisan route:clear
 php artisan view:clear
 php artisan event:clear
-
-# Clear compiled classes
-php artisan clear-compiled
 ```
+
+**Usage:** Prepares environment, clears or caches config and routes.
 
 ---
 
 ## 🗃️ 3. Database & Migrations
 
 ```bash
-# Create migration
+# Create migration (replace table name)
 php artisan make:migration create_users_table
 
 # Run all migrations
@@ -65,66 +71,66 @@ php artisan migrate:rollback
 # Reset all migrations
 php artisan migrate:reset
 
-# Refresh migrations (reset + re-run)
+# Refresh migrations
 php artisan migrate:refresh
 
-# Re-run all with seeders
+# Re-run all migrations with seeders
 php artisan migrate:fresh --seed
 
-# Seed database
-php artisan db:seed
-
-# Run specific seeder
+# Seed database (change seeder name)
 php artisan db:seed --class=UserSeeder
-
-# Check database connection
-php artisan db
 ```
+
+**Usage:** Database schema management at development and production.
 
 ---
 
 ## 🧩 4. Models, Controllers, Factories, Seeders
 
 ```bash
-# Create model
+# Create model (replace 'Product')
 php artisan make:model Product
 
-# Create model + migration
+# Create model with migration
 php artisan make:model Product -m
 
-# Create model + controller + migration + factory + seeder
+# Create model, controller, migration, factory, seeder
 php artisan make:model Product -mcrsf
 
-# Create controller
+# Create controller (replace name)
 php artisan make:controller ProductController
 
 # Create resource controller (CRUD)
 php artisan make:controller ProductController --resource
 
-# Create factory
+# Create factory (replace name)
 php artisan make:factory ProductFactory
 
-# Create seeder
+# Create seeder (replace name)
 php artisan make:seeder ProductSeeder
 ```
+
+**Usage:** Generates backend classes for data management.
 
 ---
 
 ## 🧾 5. Requests, Middleware, Policies, Providers
 
 ```bash
-# Create form request
+# Form request (replace name)
 php artisan make:request StoreProductRequest
 
-# Create middleware
+# Middleware (replace name)
 php artisan make:middleware CheckUserRole
 
-# Create policy
+# Policy (replace name)
 php artisan make:policy ProductPolicy
 
-# Create service provider
+# Service provider (replace name)
 php artisan make:provider CustomServiceProvider
 ```
+
+**Usage:** Handles input validation, authorization, and custom services.
 
 ---
 
@@ -134,270 +140,65 @@ php artisan make:provider CustomServiceProvider
 # Show all routes
 php artisan route:list
 
-# Cache routes for speed
+# Cache routes
 php artisan route:cache
 
 # Clear route cache
 php artisan route:clear
 ```
 
----
-
-## 🎨 7. Views (Blade)
-
-```bash
-# Laravel doesn't generate views via artisan
-# Just create files under: resources/views/
-# Example: resources/views/home.blade.php
-```
+**Usage:** API and web route management.
 
 ---
 
-## 🔐 8. Authentication (Breeze / Jetstream / Fortify / UI)
+## 🔐 7. Authentication (Breeze / Jetstream / Fortify / UI)
 
 ```bash
-# Install Laravel Breeze (simple auth + blade)
+# Laravel Breeze (Blade auth)
 composer require laravel/breeze --dev
 php artisan breeze:install
 npm install && npm run dev
 
-# Install Jetstream (Livewire or Inertia)
+# Jetstream (Livewire/Inertia)
 composer require laravel/jetstream
 php artisan jetstream:install livewire
 npm install && npm run build
 
-# Install Fortify (backend auth only)
+# Fortify (backend auth)
 composer require laravel/fortify
 php artisan vendor:publish --provider="Laravel\Fortify\FortifyServiceProvider"
 
-# Laravel UI (Bootstrap / Vue / React auth)
+# Laravel UI (Bootstrap/Vue/React auth)
 composer require laravel/ui
 php artisan ui bootstrap --auth
 npm install && npm run dev
 ```
 
----
-
-## 🧠 9. Artisan Generators
-
-```bash
-# Create event
-php artisan make:event UserRegistered
-
-# Create listener
-php artisan make:listener SendWelcomeEmail
-
-# Create notification
-php artisan make:notification OrderShipped
-
-# Create mail
-php artisan make:mail WelcomeMail
-
-# Create job
-php artisan make:job ProcessOrder
-
-# Create command (console command)
-php artisan make:command ImportUsers
-
-# Create observer
-php artisan make:observer ProductObserver
-
-# Create component (for Livewire/Blade)
-php artisan make:component Alert
-```
+**Usage:** Setup authentication scaffolding for web apps.
 
 ---
 
-## 🧩 10. Queues & Jobs
+## 🧪 8. PHP & Artisan Helpers
 
 ```bash
-# Create job
-php artisan make:job SendEmailJob
+# PHP built-in server (replace port if needed)
+php -S localhost:8000 -t public
 
-# Run queue worker
-php artisan queue:work
-
-# Stop queue worker
-php artisan queue:restart
-
-# Flush failed jobs
-php artisan queue:flush
-
-# Retry failed job
-php artisan queue:retry all
-```
-
----
-
-## 🗓️ 11. Scheduling
-
-```bash
-# Run all scheduled commands
-php artisan schedule:run
-
-# Test if scheduler works
-php artisan schedule:list
-```
-
----
-
-## 🧰 12. Events & Notifications
-
-```bash
-# Create event
-php artisan make:event UserRegistered
-
-# Create listener
-php artisan make:listener SendWelcomeEmail
-
-# Create notification
-php artisan make:notification InvoicePaid
-```
-
----
-
-## 🧪 13. Testing
-
-```bash
-# Create test class
-php artisan make:test ProductTest
-
-# Create feature test
-php artisan make:test ProductFeatureTest --unit
+# Interactive shell (Tinker)
+php artisan tinker
 
 # Run all tests
 php artisan test
 ```
 
----
-
-## 📦 14. Composer & NPM
-
-```bash
-# Composer install/update
-composer install
-composer update
-
-# Check outdated packages
-composer outdated
-
-# Remove cache
-composer clear-cache
-
-# Install npm dependencies
-npm install
-
-# Run dev build
-npm run dev
-
-# Run production build
-npm run build
-
-# Watch for frontend changes
-npm run watch
-```
+**Usage:** PHP dev tools and Laravel testing.
 
 ---
 
-## 🧱 15. Storage & File Management
+## 🧰 9. Git & GitHub
 
 ```bash
-# Create symbolic link (storage/public)
-php artisan storage:link
-
-# Clear storage cache
-php artisan cache:clear
-```
-
----
-
-## ⚡ 16. Optimization
-
-```bash
-# Optimize app for production
-php artisan optimize
-
-# Cache routes, config, and views
-php artisan route:cache
-php artisan config:cache
-php artisan view:cache
-
-# Clear all caches
-php artisan optimize:clear
-```
-
----
-
-## 📡 17. Deployment & Maintenance
-
-```bash
-# Put app in maintenance mode
-php artisan down
-
-# Put app in maintenance mode with message
-php artisan down --message="Upgrading system" --retry=60
-
-# Bring app back up
-php artisan up
-
-# Show optimized config
-php artisan config:show
-```
-
----
-
-## 🧰 18. Debugging Tools
-
-```bash
-# Run Tinker (interactive shell)
-php artisan tinker
-
-# Check environment
-php artisan env
-
-# Display configuration values
-php artisan config:get app.name
-```
-
----
-
-## 🌍 19. Localization (Languages)
-
-```bash
-# Publish lang files
-php artisan lang:publish
-```
-
----
-
-## 📊 20. Logs
-
-```bash
-# View Laravel log
-tail -f storage/logs/laravel.log
-```
-
----
-
-## 🧩 21. Miscellaneous
-
-```bash
-# List all artisan commands
-php artisan list
-
-# Show help for specific command
-php artisan help migrate
-
-# Display app environment
-php artisan env
-```
-
----
-
-## 🐙 22. Git & GitHub Commands for Laravel Projects
-
-```bash
-# Initialize git repo
+# Initialize git repository
 git init
 
 # Check status
@@ -407,18 +208,18 @@ git status
 git add .
 
 # Commit changes
-git commit -m "Initial commit"
+git commit -m "Your commit message"
 
-# Add remote GitHub repository
+# Add remote repository (replace URL)
 git remote add origin https://github.com/username/repo.git
 
-# Push changes to GitHub
+# Push changes
 git push -u origin main
 
-# Pull changes from GitHub
+# Pull updates
 git pull origin main
 
-# Create and switch branch
+# Create and switch branch (replace name)
 git checkout -b feature-branch
 
 # Switch branch
@@ -430,16 +231,18 @@ git merge feature-branch
 # View git log
 git log
 
-# Fetch updates without merging
+# Fetch updates
 git fetch origin
 
-# Reset local branch to remote state
+# Reset branch to remote state
 git reset --hard origin/main
 ```
 
+**Usage:** Version control, collaboration, GitHub sync.
+
 ---
 
-## ✅ Quick Start Workflow (Laravel + GitHub)
+## ✅ Quick Start Workflow (Web App Dev + GitHub)
 
 ```bash
 composer create-project laravel/laravel myapp
@@ -447,28 +250,17 @@ cd myapp
 cp .env.example .env
 php artisan key:generate
 php artisan migrate
+php -v
+php artisan serve
 git init
 git add .
 git commit -m "Initial Laravel setup"
 git remote add origin https://github.com/username/repo.git
 git push -u origin main
-php artisan serve
 ```
 
----
-
-📘 **Note:**
-All commands should be run from the root of your Laravel project (`cd myapp`).
-For frontend (Vite, Tailwind, Vue, React), always use `npm run dev` or `npm run build`.
+**Usage:** Setup Laravel web app, run server, push to GitHub.
 
 ---
 
-**💡 Tip:** Combine commands for faster setup
-
-```bash
-php artisan migrate:fresh --seed && php artisan serve
-```
-
----
-
-🧾 *Updated: 2025 — Complete Laravel + GitHub Command Reference*
+🧾 *Updated: 2025 — Complete Laravel + PHP + GitHub Web App Development Command Reference with Usage Notes*
